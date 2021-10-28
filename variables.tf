@@ -1,5 +1,5 @@
-variable "ec2-instance" {
-  type = "string"
+variable "intance-ec2" {
+  type = string
   default = "i-02dd382fc9ff81118"
 }
 
@@ -8,11 +8,11 @@ variable "region" {
 }
 
 variable "name-instance" {
-  type = "string"
+  type = string
   default = "name"
 }
 
-variable "text-block" {
-  type = "string"
-  default = "name text block"
+variable "sqs-queue-name" {
+  type = string
+  default = "sqs-queue-name"
 }
