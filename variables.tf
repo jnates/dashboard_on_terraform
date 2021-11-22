@@ -1,6 +1,6 @@
 variable "ec2-instance" {
   type = "string"
-  default = "i-19dd898fc9hg42532"
+  default = "i-19dh898fc9hg42532"
 }
 
 variable "region" {
@@ -12,7 +12,7 @@ variable "name-instance" {
   default = "name"
 }
 
-variable "sqs-queue-name" {
+variable "sqs_queue_name" {
   type = string
   default = "sqs-queue-name"
 }
