@@ -1,5 +1,6 @@
 resource "aws_cloudwatch_dashboard" "main" {
   dashboard_name = "dashboard-${var.name-instance}"
+
   dashboard_body = <<EOF
 {
     "widgets": [
@@ -11,7 +12,7 @@ resource "aws_cloudwatch_dashboard" "main" {
             "type": "metric",
             "properties": {
                 "metrics": [
-                    [ "AWS/EC2", "CPUUtilization", "InstanceId", "${var.intance-ec2}" ]
+                    [ "AWS/EC2", "CPUUtilization", "InstanceId", "${var.ec2-instance}" ]
                 ],
                 "period": 300,
                 "stat": "Average",
@@ -27,7 +28,7 @@ resource "aws_cloudwatch_dashboard" "main" {
             "type": "metric",
             "properties": {
                 "metrics": [
-                    [ "AWS/EC2", "NetworkIn", "InstanceId", "${var.intance-ec2}" ]
+                    [ "AWS/EC2", "NetworkIn", "InstanceId", "${var.ec2-instance}" ]
                 ],
                 "period": 300,
                 "stat": "Average",
@@ -62,15 +63,34 @@ resource "aws_cloudwatch_dashboard" "main" {
                 "view": "timeSeries",
                 "stacked": false,
                 "metrics": [
-                    [ "AWS/SQS", "ApproximateAgeOfOldestMessage", "QueueName", "${var.sqs-queue-name}" ],
-                    [ ".", "ApproximateNumberOfMessagesVisible", ".", "." ]
+                    [ "AWS/SQS", "ApproximateAgeOfOldestMessage", "QueueName", "madaluxe-prd-puller.fifo" ],
+                    [ ".", "ApproximateNumberOfMessagesVisible", ".", ".", { "yAxis": "right" } ]
                 ],
                 "stat": "Average",
                 "period": 300,
                 "region": "${var.region}",
-                "title": "ApproximateAgeOfOldestMessage, ApproximateNumberOfMessagesVisible"
+                "title": "${var.name-instance} -puller- ApproximateAgeOfOldestMessage, ApproximateNumberOfMessagesVisible"
             }
         },
+        {
+            "type": "metric",
+            "x": 12,
+            "y": 6,
+            "width": 12,
+            "height": 6,
+            "properties": {
+                "view": "timeSeries",
+                "stacked": false,
+                "metrics": [
+                    [ "AWS/SQS", "ApproximateAgeOfOldestMessage", "QueueName", "madaluxe-prd-pusher.fifo" ],
+                    [ ".", "ApproximateNumberOfMessagesVisible", ".", ".", { "yAxis": "right" } ]
+                ],
+                "stat": "Average",
+                "period": 300,
+                "region": "${var.region}",
+                "title": "${var.name-instance} - pusher - ApproximateAgeOfOldestMessage, ApproximateNumberOfMessagesVisible"
+            }
+        }
     ]
 }
 EOF

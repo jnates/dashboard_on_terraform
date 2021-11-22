@@ -1,6 +1,6 @@
 variable "ec2-instance" {
   type = "string"
-  default = "i-19dd898fc9hg42532"
+  default = "i-19dh898fc9hg42532"
 }
 
 variable "region" {
