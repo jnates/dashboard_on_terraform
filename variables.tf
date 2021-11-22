@@ -12,7 +12,7 @@ variable "name-instance" {
   default = "name"
 }
 
-variable "sqs-queue-name" {
+variable "sqs_queue_name" {
   type = string
   default = "sqs-queue-name"
 }

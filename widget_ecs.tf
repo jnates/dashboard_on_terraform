@@ -63,13 +63,13 @@ resource "aws_cloudwatch_dashboard" "main" {
                 "view": "timeSeries",
                 "stacked": false,
                 "metrics": [
-                    [ "AWS/SQS", "ApproximateAgeOfOldestMessage", "QueueName", "madaluxe-prd-puller.fifo" ],
+                    [ "AWS/SQS", "ApproximateAgeOfOldestMessage", "QueueName", "${var.sqs_queue_name}" ],
                     [ ".", "ApproximateNumberOfMessagesVisible", ".", ".", { "yAxis": "right" } ]
                 ],
                 "stat": "Average",
                 "period": 300,
                 "region": "${var.region}",
-                "title": "${var.name-instance} -puller- ApproximateAgeOfOldestMessage, ApproximateNumberOfMessagesVisible"
+                "title": "${var.name-instance}- ApproximateAgeOfOldestMessage, ApproximateNumberOfMessagesVisible"
             }
         },
         {
@@ -82,13 +82,13 @@ resource "aws_cloudwatch_dashboard" "main" {
                 "view": "timeSeries",
                 "stacked": false,
                 "metrics": [
-                    [ "AWS/SQS", "ApproximateAgeOfOldestMessage", "QueueName", "madaluxe-prd-pusher.fifo" ],
+                    [ "AWS/SQS", "ApproximateAgeOfOldestMessage", "QueueName", "${var.sqs_queue_name}" ],
                     [ ".", "ApproximateNumberOfMessagesVisible", ".", ".", { "yAxis": "right" } ]
                 ],
                 "stat": "Average",
                 "period": 300,
                 "region": "${var.region}",
-                "title": "${var.name-instance} - pusher - ApproximateAgeOfOldestMessage, ApproximateNumberOfMessagesVisible"
+                "title": "${var.name-instance} - ApproximateAgeOfOldestMessage, ApproximateNumberOfMessagesVisible"
             }
         }
     ]
